@@ -1,7 +1,7 @@
 import { WorkBook, utils, read } from "xlsx";
 
 export interface ExcelDomain {
-  items: [] | undefined;
+  items: [][] | undefined;
   sheets: string[];
   workbook: WorkBook;
 }

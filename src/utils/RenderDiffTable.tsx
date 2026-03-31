@@ -1,5 +1,5 @@
 import Handsontable from "handsontable";
-import Cell from "../components/Cell";
+import Cell from "./Cell";
 const daff = require("daff");
 
 export function renderDiff(

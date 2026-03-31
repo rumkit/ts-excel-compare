@@ -13,6 +13,7 @@ import "normalize.css";
 import SourceTable from "./components/SourceTable/SourceTable";
 
 import { registerAllModules } from 'handsontable/registry';
+import { normalizeFirstRow } from "./utils/normalize";
 registerAllModules();
 
 function App() {
@@ -57,15 +58,16 @@ function App() {
                   </Select.Option>
                 );
               }
+              const normalizedData = normalizeFirstRow(resp.items ?? [[]]);
               if (field === "left") {
                 setLeftSheetname(resp.sheets[0]);
                 setLeftSheetlist(sheetnames);
-                setLeftSheetData(resp.items);
+                setLeftSheetData(normalizedData);
                 setLeftWorkbook(resp.workbook);
               } else {
                 setRightSheetname(resp.sheets[0]);
                 setRightSheetlist(sheetnames);
-                setRightSheetData(resp.items);
+                setRightSheetData(normalizedData);
                 setRightWorkbook(resp.workbook);
               }
             }
@@ -103,7 +105,7 @@ function App() {
 
   return (
     <div className="App">
-      <Row>
+      <Row className="source-row">
         <Col span={11}>
           <SourceTable
             header="original"
@@ -152,7 +154,9 @@ function App() {
             fileRef={rightFileSelectRef}
           />
         </Col>
-        <Col span={24} style={{ textAlign: "center" }}>
+      </Row>
+      <Row className="diff-row">
+        <Col span={24} className="diff-col">
           <DiffResultProps
             hotTableComponentDiffResult={hotTableComponentDiffResult}
           />
