@@ -1,0 +1,16 @@
+.file-import {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+  margin-top: -20px;
+}
+
+.file-input {
+  flex: 1;
+  padding: 4px;
+}
+
+.sheet-select {
+  width: 40%;
+}

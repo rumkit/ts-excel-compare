@@ -4,13 +4,13 @@ import { Row, Col, Select } from "antd";
 
 import { ExcelHelper, ExcelDomain, SheetDomain } from "./utils/ExcelHelper";
 import { diff } from "./utils/Diff";
-import CenterHooks from "./components/Center";
-import DiffResultHooks from "./components/DiffResult";
+import CenterPanel from "./components/CenterPanel/CenterPanel";
+import DiffResultProps from "./components/DiffResult/DiffResult";
 
 import "handsontable/dist/handsontable.full.css";
 import "./App.scss";
 import "normalize.css";
-import SourceTable from "./components/SourceTable";
+import SourceTable from "./components/SourceTable/SourceTable";
 
 import { registerAllModules } from 'handsontable/registry';
 registerAllModules();
@@ -29,7 +29,6 @@ function App() {
     JSON.parse(JSON.stringify(ExcelHelper.BlankData(10, 12)))
   );
   const [rightWorkbook, setRightWorkbook] = useState<WorkBook>();
-  const [diffBtnText] = useState(">> Diff <<");
   const [hotTableComponentDiffResult] = useState(React.createRef());
 
   const leftFileSelectRef = useRef<any>(null);
@@ -117,8 +116,7 @@ function App() {
           />
         </Col>
         <Col span={2}>
-          <CenterHooks
-            btntext={diffBtnText}
+          <CenterPanel
             onDiffBtnClick={(e) => {
               diff(leftsheetdata, rightsheetdata, hotTableComponentDiffResult);
             }}
@@ -155,7 +153,7 @@ function App() {
           />
         </Col>
         <Col span={24} style={{ textAlign: "center" }}>
-          <DiffResultHooks
+          <DiffResultProps
             hotTableComponentDiffResult={hotTableComponentDiffResult}
           />
         </Col>

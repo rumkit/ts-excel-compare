@@ -1,7 +1,7 @@
 import React from "react";
 import Handsontable from "handsontable";
 import { HotTable } from "@handsontable/react";
-import FileImport from "../components/FileImport";
+import FileImport from "../FileImport/FileImport";
 import { GridSettings } from "handsontable/settings";
 
 import "./SourceTable.css";

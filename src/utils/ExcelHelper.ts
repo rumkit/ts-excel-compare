@@ -1,9 +1,9 @@
-import XLSX, { WorkBook } from "xlsx";
+import { WorkBook, utils, read } from "xlsx";
 
 export interface ExcelDomain {
   items: [] | undefined;
   sheets: string[];
-  workbook: XLSX.WorkBook;
+  workbook: WorkBook;
 }
 
 export interface SheetDomain {
@@ -33,7 +33,7 @@ export class ExcelHelper {
       var wsItem = wb.Sheets[sheetname];
 
       /* Convert array of arrays */
-      var items = XLSX.utils.sheet_to_json(wsItem, { header: 1 });
+      var items = utils.sheet_to_json(wsItem, { header: 1 });
 
       var data = {
         items: items as [] | undefined,
@@ -50,14 +50,14 @@ export class ExcelHelper {
       reader.onload = function (e) {
         /* Parse data */
         var bstr = e?.target?.result;
-        var wb = XLSX.read(bstr, { type: "array" });
+        var wb = read(bstr, { type: "array" });
 
         /* Get first worksheet */
         var wsnameItems = wb.SheetNames[0];
         var wsItem = wb.Sheets[wsnameItems];
 
         /* Convert array of arrays */
-        var items = XLSX.utils.sheet_to_json(wsItem, { header: 1 });
+        var items = utils.sheet_to_json(wsItem, { header: 1 });
 
         var data = {
           items: items,

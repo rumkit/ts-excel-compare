@@ -1,0 +1,65 @@
+.diff-result-wrapper {
+  width: 100%;
+  padding: 15px 0;
+}
+
+.diff-title {
+  margin-bottom: 10px;
+}
+
+.diff-table {
+  width: 100%;
+}
+
+.diff-table .add {
+  background-color: #7fff7f;
+}
+.diff-table .remove {
+  background-color: #ff7f7f;
+}
+.diff-table td.modify {
+  background-color: #7f7fff;
+}
+.diff-table td.conflict {
+  background-color: red;
+}
+.diff-table .spec {
+  background-color: #aaa;
+}
+.diff-table .move {
+  background-color: #ffa;
+}
+.diff-table .null {
+  color: #888;
+}
+.diff-table table {
+  border-collapse: collapse;
+}
+.diff-table td,
+.diff-table th {
+  // border: 1px solid #2d4068;
+  padding: 3px 7px 2px;
+}
+.diff-table .header,
+.diff-table th {
+  background-color: #aaf;
+  font-weight: 700;
+  padding-bottom: 4px;
+  padding-top: 5px;
+  text-align: left;
+}
+.diff-table tr.header th {
+  border-bottom: 2px solid #000;
+}
+.diff-table .gap {
+  color: #888;
+}
+.diff-table td {
+  empty-cells: show;
+}
+.diff-table tr:first-child td {
+  border-top: 1px solid #2d4068;
+}
+.diff-table td:first-child {
+  border-left: 1px solid #2d4068;
+}
