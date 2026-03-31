@@ -4,29 +4,29 @@ import { Row, Col, Select } from "antd";
 
 import { ExcelHelper, ExcelDomain, SheetDomain } from "./utils/ExcelHelper";
 import { diff } from "./utils/Diff";
-import LeftHooks from "./components/Left";
-import RightHooks from "./components/Right";
 import CenterHooks from "./components/Center";
 import DiffResultHooks from "./components/DiffResult";
 
 import "handsontable/dist/handsontable.full.css";
 import "./App.scss";
 import "normalize.css";
+import SourceTable from "./components/SourceTable";
+
+import { registerAllModules } from 'handsontable/registry';
+registerAllModules();
 
 function App() {
   var excelHelper = new ExcelHelper();
   const [leftsheetname, setLeftSheetname] = useState("Sheet1");
   const [leftsheetlist, setLeftSheetlist] = useState<any[] | null>(null);
-  const [hotTableComponentLeft] = useState(React.createRef());
   const [leftsheetdata, setLeftSheetData] = useState(
-    JSON.parse(JSON.stringify(ExcelHelper.BlankData(12, 8)))
+    JSON.parse(JSON.stringify(ExcelHelper.BlankData(10, 12)))
   );
   const [leftWorkbook, setLeftWorkbook] = useState<WorkBook>();
   const [rightsheetname, setRightSheetname] = useState("Sheet1");
   const [rightsheetlist, setRightSheetlist] = useState<any[] | null>(null);
-  const [hotTableComponentRight] = useState(React.createRef());
   const [rightsheetdata, setRightSheetData] = useState(
-    JSON.parse(JSON.stringify(ExcelHelper.BlankData(12, 8)))
+    JSON.parse(JSON.stringify(ExcelHelper.BlankData(10, 12)))
   );
   const [rightWorkbook, setRightWorkbook] = useState<WorkBook>();
   const [diffBtnText] = useState(">> Diff <<");
@@ -106,12 +106,12 @@ function App() {
     <div className="App">
       <Row>
         <Col span={11}>
-          <LeftHooks
+          <SourceTable
+            header="original"
             sheetname={leftsheetname}
             sheetlist={leftsheetlist}
             onFileSelectChange={(e) => fileHandler(e, "left")}
             onSheetSelectChange={(e) => onSheetFieldChange(e, "left")}
-            hotTableComponentLeft={hotTableComponentLeft}
             sheetdata={leftsheetdata}
             fileRef={leftFileSelectRef}
           />
@@ -135,21 +135,21 @@ function App() {
               setLeftSheetname("Sheet1");
               setRightSheetname("Sheet1");
               setLeftSheetData(
-                JSON.parse(JSON.stringify(ExcelHelper.BlankData(12, 8)))
+                JSON.parse(JSON.stringify(ExcelHelper.BlankData(10, 12)))
               );
               setRightSheetData(
-                JSON.parse(JSON.stringify(ExcelHelper.BlankData(12, 8)))
+                JSON.parse(JSON.stringify(ExcelHelper.BlankData(10, 12)))
               );
             }}
           />
         </Col>
         <Col span={11}>
-          <RightHooks
+          <SourceTable
+            header="modified"
             sheetname={rightsheetname}
             sheetlist={rightsheetlist}
             onFileSelectChange={(e) => fileHandler(e, "right")}
             onSheetSelectChange={(e) => onSheetFieldChange(e, "right")}
-            hotTableComponentRight={hotTableComponentRight}
             sheetdata={rightsheetdata}
             fileRef={rightFileSelectRef}
           />

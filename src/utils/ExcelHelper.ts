@@ -47,11 +47,10 @@ export class ExcelHelper {
   public convertFileToExcel = (file: Blob, callback: any) => {
     return new Promise((resolve, reject) => {
       var reader = new FileReader();
-      var rABS = !!reader.readAsBinaryString;
       reader.onload = function (e) {
         /* Parse data */
         var bstr = e?.target?.result;
-        var wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" });
+        var wb = XLSX.read(bstr, { type: "array" });
 
         /* Get first worksheet */
         var wsnameItems = wb.SheetNames[0];
@@ -70,8 +69,7 @@ export class ExcelHelper {
         resolve(data);
         return callback(null, data);
       };
-      if (file && rABS) reader.readAsBinaryString(file);
-      else reader.readAsArrayBuffer(file);
+      reader.readAsArrayBuffer(file);
     });
   };
 

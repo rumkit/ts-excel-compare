@@ -11,7 +11,7 @@ interface Import {
   onSheetSelectChange(e: string): any;
 }
 
-const ImportHooks = (props: Import) => {
+const FileImport = (props: Import) => {
   return (
     <Input.Group
       compact
@@ -37,9 +37,9 @@ const ImportHooks = (props: Import) => {
   );
 };
 
-ImportHooks.defaultProps = {
+FileImport.defaultProps = {
   sheetname: "Sheet1",
   sheetlist: null,
 };
 
-export default ImportHooks;
+export default FileImport;
